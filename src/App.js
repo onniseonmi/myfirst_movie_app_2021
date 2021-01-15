@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    isLoading: true,
+    count: 0
+  };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isLoading:false })
+    },6000);
+  }
+  add = () => {
+    this.setState({count: this.state.count +1})
+  }
+  minus = () => {
+    this.setState({count:this.state.count -1})
+  }
+  render() {
+    const{ isLoading} = this.state;
+    return (
+      <div>
+        <h1>{isLoading ? "Loading..." : "We are ready"}</h1>
+        <div>{this.state.count}</div>
+        <div>
+        <button onClick={this.add}>add</button>
+        <button onClick={this.minus}>minus</button>
+        </div>
+        
+      </div>
+    );
+  }
 }
 
 export default App;
